@@ -51,13 +51,12 @@ final class Bird extends UNIX {
   protected function build_bgp($parameter, $vrf = false) {
     $cmd = new CommandBuilder();
     $cmd->add($this->get_bird_binary(match_ipv6($parameter, false)));
-
+    $test = match_ipv6($parameter,false);
     // Build the command to send to the binary
     $cmd->add("'show route for", $parameter);
-    if ($this->config['bgp_detail']) {
-      $cmd->add('all');
-    }
-    $cmd->add("'");
+      if (!$test) $cmd->add('table Peers');
+      else $cmd->add('table Peers6');
+    $cmd->add("all'");
 
     return array($cmd);
   }
