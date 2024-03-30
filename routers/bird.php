@@ -54,8 +54,8 @@ final class Bird extends UNIX {
     $test = match_ipv6($parameter,false);
     // Build the command to send to the binary
     $cmd->add("'show route for", $parameter);
-      if (!$test) $cmd->add('table Peers');
-      else $cmd->add('table Peers6');
+      if (!$test) $cmd->add('table master4');
+      else $cmd->add('table master');
     $cmd->add("all'");
 
     return array($cmd);
